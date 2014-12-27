@@ -1,0 +1,18 @@
+﻿@using BatStats.Models
+@if (Model.PlayerStats != null)
+{
+    foreach (var item in Model.PlayerStats)
+    {
+        <p>@item.PlayerName's Stats</p>
+
+        <ul class="stats-list">
+            <li>Games: @item.Games</li>
+            <li>AtBats: @item.AtBats</li>
+            <li>Doubles: @item.Doubles</li>
+            <li>Triples: @item.Triples</li>
+            <li>HomeRuns: @item.HomeRuns</li>
+            <li>RBIs: @item.RBIs</li>
+            <li>Average: @item.Average</li>
+        </ul>
+    }
+}

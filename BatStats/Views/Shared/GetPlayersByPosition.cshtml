@@ -1,0 +1,47 @@
+﻿@using BatStats.Models
+@if (Model.Players != null)
+{
+    <table class="player-grid">
+        <tr>
+            <th>Position</th>
+            <th>Player</th>
+            <th>Team</th>
+        </tr>
+        @foreach (var item in Model.Players)
+        {
+            <tr>
+                <td>@item.Position</td>
+                <td>@item.PlayerName</td>
+                <td>@item.TeamName</td>
+                <td>
+                    <button class="btn btn-inverse" onclick="getStatsByPlayer('@item.PlayerName');" type="submit">View Stats</button>
+                </td>
+                <td>
+                    @using (Html.BeginForm("DraftPlayer", "Home", new { playerName = item.PlayerName }, FormMethod.Post))
+                    {
+                        <button class="btn btn-inverse" title="Draft Player" type="submit">Draft Player</button>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+<script type="text/javascript">
+    function getStatsByPlayer(playerName) {
+        $.ajax({
+            type: "GET",
+            url: "/Home/GetStatsByPlayer",
+            data: { 'playerName': playerName },
+            success: function (result) {
+                $('#players-stats').html('');
+                $("#players-stats").html(result);
+                console.log(result);
+            },
+            error: function () {
+                alert('error');
+            }
+        });
+    };
+</script>
+

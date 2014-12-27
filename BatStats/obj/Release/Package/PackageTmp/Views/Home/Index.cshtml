@@ -1,0 +1,26 @@
+﻿@using BatStats.Models
+@using BatStats.Controllers
+@{
+    ViewBag.Title = "Players";
+}
+
+<div class="left-wrapper">
+    <form id="player-form">
+        <p>
+            Sort Players to view by Position:
+            <select id="positions" data-bind="options: positions, value: selectedPosition, optionsText:'text', optionsCaption: 'Select...', event: {change: onChange}"></select>
+        </p>
+    </form>
+    <div id="players">
+        @{Html.RenderPartial("GetPlayersByPosition");}
+    </div>
+</div>
+<div class="right-wrapper">
+    <div id="players-stats">
+        @{Html.RenderPartial("GetStatsByPlayer");}
+    </div>
+</div>
+
+<script type="text/javascript">
+    var positions = @JavaScriptConverter.SerializeObject(Model.Positions)
+</script>
